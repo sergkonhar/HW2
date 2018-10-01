@@ -26,12 +26,12 @@ int[] compare = new int[newCharArray.length];
                     }
 
             }
-        compare[i]=helper;
+            compare[i] = helper;
         }
-        System.out.println(Arrays.toString(compare));
+
         for (int i = 0; i <newArray.length ; i++) {
             if(compare[i]==newArray[i].length()-1){
-                System.out.println(newArray[i]);
+                System.out.println("\n"+"Number that consist of digits in descending order"+"  "+newArray[i]);
                 break;
 
 
