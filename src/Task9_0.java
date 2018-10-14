@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -25,6 +26,14 @@ public class Task9_0 {
                    randomArray[i][j] = minValue + (nRand.nextInt((maxValue - minValue)));
                }
            }
+           int[][] secondNewArray = new int[a][b];
+           for (int i = 0; i < randomArray.length; i++) {
+               for (int j = 0; j < randomArray[i].length; j++) {
+                   secondNewArray[i][j] = randomArray[i][j];
+               }
+           }
+
+
            for (int i = 0; i < a; i++) {
                for (int j = 0; j < b; j++) {
                    System.out.print(randomArray[i][j] + " ");
@@ -232,14 +241,14 @@ public class Task9_0 {
                    if (onemorecounter % 2 != 0) {
                        for (int j = 0; j < b; j++) {
                            for (int k = 0; k < a; k++) {
-                               secondArray[(k + 1)%a][j] = randomArray[k][j];
+                               secondArray[(k + 1) % a][j] = randomArray[k][j];
                            }
                        }
                    }
                    if (onemorecounter % 2 == 0) {
                        for (int j = 0; j < b; j++) {
                            for (int k = 0; k < a; k++) {
-                               randomArray[(k + 1)%a][j] = secondArray[k][j];
+                               randomArray[(k + 1) % a][j] = secondArray[k][j];
                            }
                        }
                    }
@@ -250,14 +259,14 @@ public class Task9_0 {
                    if (onemorecounter % 2 != 0) {
                        for (int j = 0; j < b; j++) {
                            for (int k = 0; k < a; k++) {
-                               randomArray[(k + 1)%a][j] = secondArray[k][j];
+                               randomArray[(k + 1) % a][j] = secondArray[k][j];
                            }
                        }
                    }
                    if (onemorecounter % 2 == 0) {
                        for (int j = 0; j < b; j++) {
                            for (int k = 0; k < a; k++) {
-                               secondArray[(k + 1)%a][j] = randomArray[k][j];
+                               secondArray[(k + 1) % a][j] = randomArray[k][j];
                            }
                        }
                    }
@@ -269,30 +278,30 @@ public class Task9_0 {
 
            }
            System.out.println("Array shifted  by" + "  " + shift + "  " + "positions");
-          if (newcounter%2==0) {
-              if (onemorecounter % 2 != 0) {
-                  for (int i = 0; i < a; i++) {
-                      for (int j = 0; j < b; j++) {
-                          System.out.print(secondArray[i][j] + "  ");
+           if (newcounter % 2 == 0) {
+               if (onemorecounter % 2 != 0) {
+                   for (int i = 0; i < a; i++) {
+                       for (int j = 0; j < b; j++) {
+                           System.out.print(secondArray[i][j] + "  ");
 
-                      }
-                      System.out.println();
+                       }
+                       System.out.println();
 
-                  }
-              }
-              if (onemorecounter % 2 == 0) {
-                  for (int i = 0; i < a; i++) {
-                      for (int j = 0; j < b; j++) {
-                          System.out.print(randomArray[i][j] + "  ");
+                   }
+               }
+               if (onemorecounter % 2 == 0) {
+                   for (int i = 0; i < a; i++) {
+                       for (int j = 0; j < b; j++) {
+                           System.out.print(randomArray[i][j] + "  ");
 
-                      }
-                      System.out.println();
-                  }
+                       }
+                       System.out.println();
+                   }
 
 
-              }
-          }
-           if (newcounter%2!=0) {
+               }
+           }
+           if (newcounter % 2 != 0) {
                if (onemorecounter % 2 != 0) {
                    for (int i = 0; i < a; i++) {
                        for (int j = 0; j < b; j++) {
@@ -314,10 +323,122 @@ public class Task9_0 {
 
                }
            }
-          }
+
+           int[][] helperArray = new int[a][b];
+
+           for (int i = 0; i < a; i++) {
+               int removecounter = 0;
+               for (int k = 0; k < b; k++) {
+
+                   helperArray[i][k] = secondNewArray[a - 1 - removecounter][i];
+                   removecounter += 1;
+               }
+
+           }
+           System.out.println("90 degrees rotation");
+           for (int i = 0; i < a; i++) {
+               for (int j = 0; j < b; j++) {
+                   System.out.print(helperArray[i][j] + "  ");
+
+               }
+               System.out.println();
+           }
+
+
+           int[][] helper2 = new int[a][b];
+           for (int i = 0; i < a; i++) {
+               int removecounter = 0;
+               for (int k = 0; k < b; k++) {
+
+                   helper2[i][k] = helperArray[a - 1 - removecounter][i];
+                   removecounter += 1;
+               }
+
+           }
+
+           System.out.println("180 degrees rotation");
+           for (int i = 0; i < a; i++) {
+               for (int j = 0; j < b; j++) {
+                   System.out.print(helper2[i][j] + "  ");
+
+               }
+               System.out.println();
+           }
+           int[][] helper3 = new int[a][b];
+           for (int i = 0; i < a; i++) {
+               int removecounter = 0;
+               for (int k = 0; k < b; k++) {
+
+                   helper3[i][k] = helper2[a - 1 - removecounter][i];
+                   removecounter += 1;
+               }
+
+           }
+
+           System.out.println("270 degrees rotation");
+           for (int i = 0; i < a; i++) {
+               for (int j = 0; j < b; j++) {
+                   System.out.print(helper3[i][j] + "  ");
+
+               }
+               System.out.println();
+           }
+           int[][] substractionArray = new int[a][b];
+           int sum = 0;
+           int countsum = 0;
+           int divider = 0;
+           for (int i = 0; i < secondNewArray.length; i++) {
+               for (int j = 0; j < secondNewArray[i].length; j++) {
+                   sum += secondNewArray[i][j];
+                   countsum += 1;
+               }
+
+           }
+           divider = sum / countsum;
+
+           for (int i = 0; i < a; i++) {
+               for (int j = 0; j < b; j++) {
+                   substractionArray[i][j] = secondNewArray[i][j] - divider;
+
+               }
+           }
+           System.out.println("Array with elements from which mean was subtracted");
+           for (int i = 0; i < a; i++) {
+               for (int j = 0; j < b; j++) {
+                   System.out.print(substractionArray[i][j] + "  ");
+
+               }
+               System.out.println();
+           }
+           int assist;
+
+
+
+           for (int i = 0; i < secondNewArray.length; i++) {
+               for (int j = secondNewArray[i].length - 1; j >= 0; j--) {
+                   for (int k = 0; k < j ; k++) {
+                       if (secondNewArray[i][k] == 0) {
+                           assist = secondNewArray[i][k];
+                           secondNewArray[i][k] = secondNewArray[i][k + 1];
+                           secondNewArray[i][k + 1] = assist;
+
+                       }
+                   }
+               }
+           }
+
+           System.out.println("Array where all 0 elements placed in the end");
+           for (int i = 0; i < a; i++) {
+               for (int j = 0; j < b; j++) {
+                   System.out.print(secondNewArray[i][j] + "  ");
+
+               }
+               System.out.println();
+           }
+       }
 
     catch (Exception e){
-        System.out.println("Wrong format. Potentially there is a wrong separator" + "  "+e );
+        System.out.println("Wrong format." + "  "+e );
     }
 
 
