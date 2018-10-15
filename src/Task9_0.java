@@ -26,6 +26,12 @@ public class Task9_0 {
                    randomArray[i][j] = minValue + (nRand.nextInt((maxValue - minValue)));
                }
            }
+           int [][] thirdnewarray = new int[a][b];
+           for (int i = 0; i < randomArray.length; i++) {
+               for (int j = 0; j < randomArray[i].length; j++) {
+                   thirdnewarray [i][j] = randomArray[i][j];
+               }
+           }
            int[][] secondNewArray = new int[a][b];
            for (int i = 0; i < randomArray.length; i++) {
                for (int j = 0; j < randomArray[i].length; j++) {
@@ -326,11 +332,11 @@ public class Task9_0 {
 
            int[][] helperArray = new int[a][b];
 
-           for (int i = 0; i < a; i++) {
+           for (int i = 0; i <a; i++) {
                int removecounter = 0;
-               for (int k = 0; k < b; k++) {
+               for (int k = b-1; k >=0; k--) {
 
-                   helperArray[i][k] = secondNewArray[a - 1 - removecounter][i];
+                   helperArray[i][k] = secondNewArray[a - 1 - removecounter][b-1-i];
                    removecounter += 1;
                }
 
@@ -348,9 +354,9 @@ public class Task9_0 {
            int[][] helper2 = new int[a][b];
            for (int i = 0; i < a; i++) {
                int removecounter = 0;
-               for (int k = 0; k < b; k++) {
+               for (int k = b-1; k >=0; k--) {
 
-                   helper2[i][k] = helperArray[a - 1 - removecounter][i];
+                   helper2[i][k] = helperArray[a - 1 - removecounter][b-1-i];
                    removecounter += 1;
                }
 
@@ -367,9 +373,9 @@ public class Task9_0 {
            int[][] helper3 = new int[a][b];
            for (int i = 0; i < a; i++) {
                int removecounter = 0;
-               for (int k = 0; k < b; k++) {
+               for (int k = b-1; k >=0; k--) {
 
-                   helper3[i][k] = helper2[a - 1 - removecounter][i];
+                   helper3[i][k] = helper2[a - 1 - removecounter][b-1-i];
                    removecounter += 1;
                }
 
@@ -435,7 +441,256 @@ public class Task9_0 {
                }
                System.out.println();
            }
+int sumarray[]=new int[a];
+           for (int i = 0; i <a ; i++) {
+               breakthis:
+               for (int j = 0; j <b ; j++) {
+                   if(thirdnewarray[i][j]>=0&j!=b-1&j!=b-2){
+                       for (int k = j+1; k <b ; k++) {
+                           if (thirdnewarray[i][k]<0){
+                           sumarray[i]+=thirdnewarray[i][k];
+
+                           }
+                       if (thirdnewarray[i][k]>=0){
+                           break breakthis;
+                       }
+                      if(thirdnewarray[i][k]<0&k==b-1){
+                          sumarray[i]=0;
+                          break breakthis;
+                      }
+                       if (k==b-1){
+                           break breakthis;
+                       }
+                       }
+                   }
+               }
+           }
+           System.out.println("Sum of elements between two positive numbers in each row");
+           for (int i = 0; i <sumarray.length ; i++) {
+               System.out.println(sumarray[i]);
+           }
+           int overal =0;
+           for (int i = 0; i <sumarray.length ; i++) {
+               overal+=sumarray[i];
+           }
+           System.out.println("Overall sum of elements between two positive numbers in each row");
+           System.out.println(overal);
+           int[] onedimension1= new int [a*b];
+           int positioncounter1 =0;
+           for (int i = 0; i <a ; i++) {
+               for (int j = 0; j <b ; j++) {
+                   onedimension1[positioncounter1] = thirdnewarray[i][j];
+                   positioncounter1+=1;
+               }
+           }
+           int[][]lengthtarray1 = new int[a*b][a*b];
+           for (int i = 0; i <a*b ; i++) {
+               for (int j = 0; j <a*b ; j++) {
+                   lengthtarray1[i][j]=Integer.MAX_VALUE;
+               }
+           }
+           int outer1 = 0;
+           int inner1 =0;
+           for (int i = 0; i <a*b-1 ; i++) {
+               if (onedimension1[i]>onedimension1[i+1]){
+                   lengthtarray1[outer1][inner1]=onedimension1[i];
+               inner1+=1;
+               }
+           if (onedimension1[i]<=onedimension1[i+1]){
+               lengthtarray1[outer1][inner1]=onedimension1[i];
+               outer1+=1;
+               inner1 = 0;
+           }
+               if (i==(a*b)-2){
+                   if(onedimension1[i]>onedimension1[i+1]){
+                       lengthtarray1[outer1][inner1]=onedimension1[i+1];
+                   }
+                   if (onedimension1[i]<=onedimension1[i+1]){
+                       lengthtarray1[outer1][0]=onedimension1[i+1];
+                   }
+
+               }
+           }
+
+
+       int counteragain1 = 0;
+           int [] greatestsequence1 = new int [a*b];
+           for (int i = 0; i <lengthtarray1.length ; i++) {
+               counteragain1 = 0;
+               for (int j = 0; j <lengthtarray1[i].length-1 ; j++) {
+                   if (lengthtarray1[i][j]>lengthtarray1[i][j+1]){
+                       counteragain1+=1;
+                   }
+               }
+           greatestsequence1[i]=counteragain1;
+           }
+
+
+           int min1= 0;
+       int position1 = 0;
+           for (int i = 0; i <greatestsequence1.length ; i++) {
+               if (greatestsequence1[i]>min1){
+                   min1=greatestsequence1[i];
+                   position1=i;
+               }
+           }
+           System.out.println("\n"+"The longest sequence where numbers are decreasing");
+           if (min1!=0) {
+               for (int i = 0; i <min1+1 ; i++) {
+                   System.out.print(lengthtarray1[position1][i]+"  ");
+               }
+           }
+           int[] onedimension = new int [a*b];
+           int positioncounter =0;
+           for (int i = 0; i <a ; i++) {
+               for (int j = 0; j <b ; j++) {
+                   onedimension[positioncounter] = thirdnewarray[i][j];
+                   positioncounter+=1;
+               }
+           }
+           int[][]lengthtarray = new int[a*b][a*b];
+          int value = Integer.MIN_VALUE;
+           for (int i = 0; i <a*b ; i++) {
+               for (int j = 0; j <a*b ; j++) {
+                   lengthtarray[i][j]=value;
+               }
+           }
+           int outer = 0;
+           int inner =0;
+           for (int i = 0; i <a*b-1 ; i++) {
+               if (onedimension[i]<onedimension[i+1]){
+                   lengthtarray[outer][inner]=onedimension[i];
+                   inner+=1;
+               }
+
+               if (onedimension[i]>=onedimension[i+1]) {
+                   lengthtarray[outer][inner] = onedimension[i];
+                   outer += 1;
+                   inner = 0;
+               }
+                   if (i==(a*b)-2){
+                   if(onedimension[i]<onedimension[i+1]){
+                       lengthtarray[outer][inner]=onedimension[i+1];
+                   }
+               if (onedimension[i]>=onedimension[i+1]){
+                   lengthtarray[outer][0]=onedimension[i+1];
+               }
+
+                   }
+
+
+           }
+
+
+
+
+           int counteragain = 0;
+           int [] greatestsequence = new int [a*b];
+           for (int i = 0; i <lengthtarray.length ; i++) {
+               counteragain = 0;
+               for (int j = 0; j <lengthtarray[i].length-1 ; j++) {
+                   if (lengthtarray[i][j]<lengthtarray[i][j+1]){
+                       counteragain+=1;
+                   }
+               }
+               greatestsequence[i]=counteragain;
+           }
+
+
+           int min= 0;
+           int position = 0;
+           for (int i = 0; i <greatestsequence.length ; i++) {
+               if (greatestsequence[i]>min){
+                   min=greatestsequence[i];
+                   position=i;
+               }
+           }
+
+
+           System.out.println("\n"+"The longest sequence where numbers are increasing");
+           if (min!=0) {
+               for (int i = 0; i <min+1 ; i++) {
+                   System.out.print(lengthtarray[position][i]+"  ");
+               }
+           }
+
+           boolean[] istherewhtweneed = new boolean[a];
+
+           for (int i = 0; i <thirdnewarray.length ; i++) {
+               int trueorfalse=0;
+               for (int j = 0; j <thirdnewarray[i].length ; j++) {
+                   if(thirdnewarray[i][j]==0){
+                       trueorfalse+=1;
+                   }
+               }
+           if (trueorfalse==thirdnewarray[i].length){
+               istherewhtweneed[i]=true;
+           }
+           }
+int howmanyfalse = 0;
+           for (int i = 0; i <istherewhtweneed.length ; i++) {
+               if (!istherewhtweneed[i]){
+                   howmanyfalse+=1;
+               }
+           }
+     int [] [] withot0inrows = new int[howmanyfalse][b];
+           int position2 = 0;
+
+           for (int i = 0; i <a ; i++) {
+               if (!istherewhtweneed[i]) {
+                   for (int j = 0; j < b; j++) {
+withot0inrows[position2][j]=thirdnewarray[i][j];
+                   }
+                   position2 +=1;
+               }
+               }
+           System.out.println("\n"+"Matrix with removed empty rows");
+               for (int i = 0; i <withot0inrows.length ; i++) {
+               for (int j = 0; j <withot0inrows[i].length ; j++) {
+                   System.out.print(withot0inrows[i][j]+"  ");
+               }
+               System.out.println();
+           }
+      boolean[] againtrue = new boolean[b];
+
+               for (int i = 0; i <b ; i++) {
+                   int countit =0;
+               for (int j = 0; j <a ; j++) {
+                   if (thirdnewarray[j][i]==0){
+countit+=1;
+                   }
+               }
+           if (countit==a){
+               againtrue[i]=true;
+           }
+               }
+           int howmanytrue1 =0;
+               for (int i = 0; i <againtrue.length ; i++) {
+               if(!againtrue[i]){
+                   howmanytrue1+=1;
+               }
+           }
+
+           int[][]donearray = new int[howmanyfalse][howmanytrue1];
+           int additonal=0;
+           for (int i = 0; i <b ; i++) {
+             if(!againtrue[i]){
+                 for (int j = 0; j <withot0inrows.length ; j++) {
+                     donearray[j][additonal]=withot0inrows[j][i];
+                 }
+             additonal+=1;
+             }
+           }
+           System.out.println("\n"+"Matrix with removed empty columns");
+           for (int i = 0; i <donearray.length ; i++) {
+               for (int j = 0; j <donearray[i].length ; j++) {
+                   System.out.print(donearray[i][j]+"  ");
+               }
+               System.out.println();
+           }
+
        }
+
 
     catch (Exception e){
         System.out.println("Wrong format." + "  "+e );
